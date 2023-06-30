@@ -1,6 +1,4 @@
-﻿using System.Threading;
-
-namespace TextToNumericConverter
+﻿namespace TextToNumericConverter
 {
     public class Program
     {

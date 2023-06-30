@@ -1,7 +1,4 @@
-﻿using System;
-using System.Text.RegularExpressions;
-
-namespace TextToNumericConverter
+﻿namespace TextToNumericConverter
 {
     public static class NumericConverter
     {
@@ -46,16 +43,20 @@ namespace TextToNumericConverter
             { "quadrillion",1000000000000000}
         };
 
-
+        /// <summary>
+        /// Converts all numeric values written as text to numeric.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static string Convert(string input)
         {
             string output = "";
 
-            // metni parçala ve sayıların indexlerini bul
+            // Split text and find the indexes.
             string[] wordArray = input.Split(' ');
             int[] numIndexes = FindNumberStringInText(wordArray);
 
-            // indexlerdeki sayıları birleştir.
+            // Convert to number and join text.
             output += string.Join(' ', wordArray, 0, numIndexes[0]);
 
             string tempFrom = "", tempCount = "";
@@ -97,7 +98,6 @@ namespace TextToNumericConverter
 
         /// <summary>
         /// Finds an indexes of numeric strings in text.
-        /// Returns indexes seperated with comma as string.
         /// </summary>
         /// <param name="input"></param>
         private static int[] FindNumberStringInText(string[] words)
@@ -150,24 +150,22 @@ namespace TextToNumericConverter
                 .Where(y => numberMapping.ContainsKey(y))
                 .Select(z => numberMapping[z]);
 
-            // example: thirty million one hundred twenty three
-
-            long acc = 0, total = 0L;
+            long temp = 0, total = 0L;
 
             foreach (var n in numbers)
             {
                 if (n >= 1000)
                 {
-                    total += acc * n;
-                    acc = 0;
+                    total += temp * n;
+                    temp = 0;
                 }
                 else if (n >= 100)
                 {
-                    acc *= n;
+                    temp *= n;
                 }
-                else acc += n;
+                else temp += n;
             }
-            return (total + acc);
+            return (total + temp);
         }
     }
 }
