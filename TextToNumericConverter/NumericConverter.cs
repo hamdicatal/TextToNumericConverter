@@ -59,7 +59,9 @@
             // Convert to number and join text.
             output += string.Join(' ', wordArray, 0, numIndexes[0]);
 
-            string tempFrom = "", tempCount = "";
+            //string tempFrom = "", tempCount = "";
+            List<int> tempFrom = new List<int>();
+            List<int> tempCount = new List<int>();
             int count = 1;
 
             for (int i = 0; i < numIndexes.Length; i++)
@@ -70,14 +72,19 @@
                 }
                 else
                 {
-                    tempFrom = tempFrom + (numIndexes[i]-count+1) + ",";
-                    tempCount = tempCount + count + ",";
+                    //tempFrom = tempFrom + (numIndexes[i]-count+1) + ",";
+                    //tempCount = tempCount + count + ",";
+                    tempFrom.Add(numIndexes[i] - count + 1);
+                    tempCount.Add(count);
                     count = 1;
                 }   
             }
 
-            int[] joinCount = Array.ConvertAll(tempCount.Split(',', StringSplitOptions.RemoveEmptyEntries), int.Parse);
-            int[] joinFrom = Array.ConvertAll(tempFrom.Split(',', StringSplitOptions.RemoveEmptyEntries), int.Parse);
+            //int[] joinCount = Array.ConvertAll(tempCount.Split(',', StringSplitOptions.RemoveEmptyEntries), int.Parse);
+            //int[] joinFrom = Array.ConvertAll(tempFrom.Split(',', StringSplitOptions.RemoveEmptyEntries), int.Parse);
+
+            int[] joinCount = tempCount.ToArray();
+            int[] joinFrom = tempFrom.ToArray();
 
             for (int i = 0; i < joinFrom.Length; i++)
             {
