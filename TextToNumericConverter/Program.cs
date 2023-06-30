@@ -11,6 +11,8 @@
             Console.WriteLine("Input: " + input);
             Console.WriteLine("Output: " + output);
             Console.ReadKey();
+
+            // TODO: refactor and write unit tests. DON'T FORGET!!!
         }
     }
 }
