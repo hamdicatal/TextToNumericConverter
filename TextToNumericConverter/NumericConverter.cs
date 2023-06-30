@@ -52,24 +52,24 @@ namespace TextToNumericConverter
             string output = "";
 
             // metni parçala ve sayıların indexlerini bul
-            var(indexes, wordArray) = FindNumberStringInText(input);
+            string[] wordArray = input.Split(' ');
+            int[] numIndexes = FindNumberStringInText(wordArray);
 
-            // indexlerdeki sayıları birleştir
-
-            output += string.Join(' ', wordArray, 0, indexes[0]);
+            // indexlerdeki sayıları birleştir.
+            output += string.Join(' ', wordArray, 0, numIndexes[0]);
 
             string tempFrom = "", tempCount = "";
             int count = 1;
 
-            for (int i = 0; i < indexes.Length; i++)
+            for (int i = 0; i < numIndexes.Length; i++)
             {
-                if (i < indexes.Length - 1 && indexes[i + 1] == (indexes[i] + 1))
+                if (i < numIndexes.Length - 1 && numIndexes[i + 1] == (numIndexes[i] + 1))
                 {
                     count++;
                 }
                 else
                 {
-                    tempFrom = tempFrom + (indexes[i]-count+1) + ",";
+                    tempFrom = tempFrom + (numIndexes[i]-count+1) + ",";
                     tempCount = tempCount + count + ",";
                     count = 1;
                 }   
@@ -92,7 +92,7 @@ namespace TextToNumericConverter
             int tmp2 = wordArray.Length - tmp1;
             output += " " + string.Join(' ', wordArray, tmp1, tmp2);
 
-            return output;
+            return output.TrimStart().TrimEnd();
         }
 
         /// <summary>
@@ -100,9 +100,8 @@ namespace TextToNumericConverter
         /// Returns indexes seperated with comma as string.
         /// </summary>
         /// <param name="input"></param>
-        private static (int[] indexes, string[] wordArray) FindNumberStringInText(string input)
+        private static int[] FindNumberStringInText(string[] words)
         {
-            string[] words = input.Split(' ');
             int temp = 0, tempJ = 0;
             List<int> numIndexes = new List<int>();
 
@@ -128,7 +127,7 @@ namespace TextToNumericConverter
                 }
             }
 
-            return (indexes: numIndexes.ToArray(), wordArray: words);
+            return numIndexes.ToArray();
         }
 
         /// <summary>

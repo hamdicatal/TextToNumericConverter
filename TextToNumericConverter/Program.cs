@@ -7,6 +7,7 @@ namespace TextToNumericConverter
         static void Main(string[] args)
         {
             string input = "He paid one thousand twenty five for thirty million one hundred twenty three such cars.";
+            //input = "one thousand twenty five for thirty million one hundred twenty three such cars.";
             string output = NumericConverter.Convert(input);
 
             Console.WriteLine("Input: " + input);
