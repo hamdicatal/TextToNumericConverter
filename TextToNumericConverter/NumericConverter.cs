@@ -5,7 +5,7 @@
         /// <summary>
         /// Assumed our input up to quadrillion level
         /// </summary>
-        private static Dictionary<string, long> numberMapping = new Dictionary<string, long>()
+        public static Dictionary<string, long> numberMapping = new Dictionary<string, long>()
         {
             { "zero", 0 },
             { "one", 1 },
@@ -54,7 +54,7 @@
 
             // Split text and find the indexes.
             string[] wordArray = input.Split(' ');
-            int[] numIndexes = FindNumberStringInText(wordArray);
+            int[] numIndexes = FindNumberStringInWordArray(wordArray);
 
             // Convert to number and join text.
             output += string.Join(' ', wordArray, 0, numIndexes[0]);
@@ -98,9 +98,10 @@
 
         /// <summary>
         /// Finds an indexes of numeric strings in text.
+        /// words: string array. includes all splitted words in text.
         /// </summary>
         /// <param name="input"></param>
-        private static int[] FindNumberStringInText(string[] words)
+        public static int[] FindNumberStringInWordArray(string[] words)
         {
             int temp = 0, tempJ = 0;
             List<int> numIndexes = new List<int>();
@@ -136,7 +137,7 @@
         /// </summary>
         /// <param name="numberString"></param>
         /// <returns></returns>
-        private static long ConvertToNumber(string numberString)
+        public static long ConvertToNumber(string numberString)
         {
             #region With RegEx
             //var numbers = Regex.Matches(numberString, @"\w+").Cast<Match>()

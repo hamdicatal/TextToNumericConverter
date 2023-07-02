@@ -4,15 +4,20 @@
     {
         static void Main(string[] args)
         {
-            string input = "He paid one thousand twenty five for thirty million one hundred twenty three such cars.";
-            //input = "one thousand twenty five for thirty million one hundred twenty three such cars.";
-            string output = NumericConverter.Convert(input);
+            while (true)
+            {
+                Console.WriteLine("Please input some text to convert:");
+                string input = Console.ReadLine();
 
-            Console.WriteLine("Input: " + input);
-            Console.WriteLine("Output: " + output);
-            Console.ReadKey();
+                if (string.IsNullOrWhiteSpace(input))
+                    input = "He paid one thousand twenty five for thirty million one hundred twenty three such cars.";
 
-            // TODO: refactor and write unit tests. DON'T FORGET!!!
+                string output = NumericConverter.Convert(input);
+
+                Console.WriteLine("Input: " + input);
+                Console.WriteLine("Output: " + output);
+                Console.WriteLine("_____________________________________");
+            }
         }
     }
 }
